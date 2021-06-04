@@ -1,0 +1,35 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "rmanish/multi-client",
+            "host": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "rmanish/multi-server",
+            "host": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "rmanish/multi-worker",
+            "host": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "rmanish/multi-nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]
+        }
+    ]
+}
